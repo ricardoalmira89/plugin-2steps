@@ -1,0 +1,7 @@
+{
+    "require": {
+        "two-step-reviews/rest-client": "^1.0",
+        "symfony/var-dumper": "^4.2",
+        "timber/timber": "^1.9"
+    }
+}

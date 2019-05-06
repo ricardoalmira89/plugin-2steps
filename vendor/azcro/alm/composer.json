@@ -1,0 +1,27 @@
+{
+  "type": "package",
+  "name": "azcro/alm",
+  "description": "Funcionalidades standard",
+  "keywords": ["array", "string", "utils", "php"],
+  "authors": [
+    {
+      "name": "Ricardo Almira",
+      "email": "ricardoalmira89@gmail.com",
+      "homepage": "https://github.com/ricardoalmira89"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^3.3",
+    "phpunit/phpunit": "6.1.3"
+  },
+  "license": "MIT",
+  "autoload": {
+    "files": ["src/autoload.php"],
+    "psr-4": {
+      "Alm\\": "src/"
+    }
+  }
+}

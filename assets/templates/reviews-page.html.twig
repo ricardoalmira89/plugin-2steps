@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <link href="https://app.2stepreviews.com/styles.179ce63cd3ba0f7ebb8f.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://app.2stepreviews.com/materialdesignicons-webfont.cc3cf0bd5af9550e4d18.woff2?v=1.8.36">
+    <title>Reviews Page</title>
+
+</head>
+<body>
+
+<div class="col-md-8 order-md-1 col-sm-12 order-2 ps ps--active-y">
+    <div class="card">
+
+        {% for review in reviews %}
+
+        <!-- Each Comment -->
+        <div class="comment-widgets">
+            <div class="d-flex flex-row comment-row">
+                <div class="p-2">
+                    <ngx-avatar _nghost-c5="">
+                        <div class="avatar-container" style="width: 50px; height: 50px;"><!----><!---->
+                            <div class="avatar-content"
+                                 style="text-align: center; border-radius: 100%; text-transform: uppercase; color: rgb(255, 255, 255); background-color: rgb(69, 59, 141); font: 16px/50px Helvetica, Arial, sans-serif;">
+                                {{ review.customer | slice(0,2) }}
+                            </div>
+                        </div>
+                    </ngx-avatar>
+                </div>
+                <div class="comment-text active w-100">
+                    <span class="text-muted float-right" style="cursor: pointer"><!----></span>
+                    <h4 class="font-medium">{{ review.customer }}</h4>
+                    <span class="m-b-15 d-block">
+                        <i class="fa fa-map-marker"></i><b> {{ review.office_name }}</b> &nbsp;&nbsp;&nbsp;&nbsp; {{ review.office_address }} <br
+                        ><br> {{ review.comment }} <br
+                        ><br><!----><img alt=""
+                                         src="https://app.2stepreviews.com/assets/images/google.png"
+                                         style="width: 25px;height: 25px">
+                        <!----></span>
+                    <div class="comment-footer "><span class="text-muted float-right" style="font-size: 14px">{{ review.created_at | date('l, F j, Y') }}</span>
+
+                        <span style="color: #00b0ff">
+                            {% for i in range(1,review.punctuation) %}
+                                <i class="fa fa-star"></i>
+                            {% endfor %}
+                        </span>
+                    </div>
+
+                    <div class="comment-footer">
+                        <div class="d-flex justify-content-end"><!---->
+
+                            {% if (review.sms) %}
+                                {% for tag in review.tags %}
+
+                                    {% if (tag.nombre == review.sms.sender.nombre) %}
+                                        <button class="btn btn-outline-dark btn-sm"><i
+                                                    class="fa fa-send  m-r-10 font-14"></i><i
+                                                    class="fa fa-tag  m-r-10 font-14"></i>{{ tag.nombre }}
+                                        </button>
+                                    {% else %}
+                                        <button class="btn btn-outline-dark btn-sm"><i
+                                                    class="fa fa-tag  m-r-10 font-14"></i>{{ tag.nombre }}
+                                        </button>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
+
+                        </div><!---->
+
+                        {% if review.reply %}
+                            <hr><!---->
+                            <strong class="ml-md-0">Response from the owner:&nbsp;</strong><!---->
+                            <p>{{ review.reply }}</p>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+        {% endfor %}
+
+        <!-- Paginator -->
+        <form action="{{ url }}" method="post">
+            <div class="d-flex justify-content-center mb-3 text-white"><!---->
+                <button class="btn btn-primary btn-circle" type="submit"><i
+                            class="fa fa-refresh"></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+</body>
+</html>
