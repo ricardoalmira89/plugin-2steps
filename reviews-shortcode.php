@@ -32,14 +32,21 @@ function getPaginatedUrl(){
     return $url;
 }
 
-function showReviews()
+function showReviews($atts = [])
 {
+    $company_id = \Alm\AlmArray::get($atts, 'company_id');
+
     connect();
     $client = new Client();
     if (!$client->authManager->isConnected())
         return;
 
-    $res = $client->get('review')->index(['limit' => getLimit()]);
+    //--- Si se especifica company_id, se filtra, de lo contrario no
+    $params = ['limit' => getLimit()];
+    if ($company_id)
+        $params['company_id'] = $company_id;
+
+    $res = $client->get('review')->index($params);
 
     Timber::render('assets/templates/reviews-page.html.twig', array(
         'reviews' => $res->data->results,
@@ -48,7 +55,9 @@ function showReviews()
 
 }
 
-function showFooter(){
+function showFooter($atts = []){
+
+    $company_id = \Alm\AlmArray::get($atts, 'company_id');
 
     connect();
     $client = new Client();
@@ -56,7 +65,13 @@ function showFooter(){
     if (!$client->authManager->isConnected())
         return;
 
-    $res = $client->get('dashboard')->getDashboard();
+    //--- Si se especifica company_id, se filtra, de lo contrario no
+    $params = ['limit' => getLimit()];
+    if ($company_id)
+        $params['company_id'] = $company_id;
+
+
+    $res = $client->get('dashboard')->getDashboard($params);
 
     Timber::render('assets/templates/reviews-footer.html.twig', array(
         'company_name' => $res->company[0]->name,

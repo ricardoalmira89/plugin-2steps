@@ -12,9 +12,16 @@ $dash = null;
 if ($result['connected']){
     //-- Get company ---
     $client = new \TwoStepReviews\Client();
-    $res = $client->get('company')->index();
-    $company = $res->data->results[0];
-    $dash = $client->get('dashboard')->getDashBoard();
+
+    $profile = $client->get('user')->getProfile();
+    $role = $profile->data->role->name;
+
+    $dash = [];
+    if ($role != 'ROLE_SUPER' && $role != 'ROLE_ENTERPRISE'){
+        $res = $client->get('company')->index();
+        $company = $res->data->results[0];
+        $dash = $client->get('dashboard')->getDashBoard();
+    }
 }
 
 
