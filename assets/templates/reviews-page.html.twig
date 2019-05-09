@@ -82,6 +82,7 @@
 
         {% endfor %}
 
+        {% if reviews.lenght > 0 %}
         <!-- Paginator -->
         <form action="{{ url }}" method="post">
             <div class="d-flex justify-content-center mb-3 text-white"><!---->
@@ -90,6 +91,7 @@
                 </button>
             </div>
         </form>
+        {% endif %}
 
     </div>
 
