@@ -53,11 +53,13 @@ function showReviews($atts = [])
         'url' => getPaginatedUrl()
     ));
 
+    add_action( 'wp_footer', function() use ( $atts ) {
+        showFooter( $atts );
+    });
+
 }
 
 function showFooter($atts = []){
-
-    $company_id = \Alm\AlmArray::get($atts, 'company_id');
 
     connect();
     $client = new Client();
@@ -65,11 +67,19 @@ function showFooter($atts = []){
     if (!$client->authManager->isConnected())
         return;
 
+    //--- Si el role es SUPER o ENTREPRISE, y no se especifica company_id en el shortcode
+    //--- entoncs no se muestra el footer
+    $company_id = \Alm\AlmArray::get($atts, 'company_id');
+    $profile = $client->get('user')->getProfile();
+    $role = $profile->data->role->name;
+    if ( ($role == 'ROLE_SUPER' || $role == 'ROLE_ENTERPRISE') && !$company_id)
+        return;
+
+
     //--- Si se especifica company_id, se filtra, de lo contrario no
-    $params = ['limit' => getLimit()];
+    $params = [];
     if ($company_id)
         $params['company_id'] = $company_id;
-
 
     $res = $client->get('dashboard')->getDashboard($params);
 

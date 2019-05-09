@@ -221,6 +221,8 @@ class AuthManager
         $this->expiresIn = AlmArray::get($token, 'expires_in');
         $this->expiresDate = new \DateTime(AlmArray::get($token, 'expires_date'));
         $this->api = AlmArray::get($token, 'api');
+        $this->client_id =  AlmArray::get($token, 'client_id');
+        $this->client_secret =  AlmArray::get($token, 'client_secret');
     }
 
     private function expiresAt($timestamp){

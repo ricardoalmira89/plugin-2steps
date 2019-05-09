@@ -43,7 +43,7 @@ class Two_Step_Reviews_App {
         // Hook the 'admin_menu' action hook, run the function named 'mfp_Add_My_Admin_Link()'
         add_action( 'admin_menu', array( 'Two_Step_Reviews_App', 'add_menu_admin' ) );
 
-        add_action( 'wp_footer', 'showFooter' );
+//        add_action( 'wp_footer', 'showFooter');
 
 	}
 

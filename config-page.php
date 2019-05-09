@@ -24,6 +24,10 @@ if ($result['connected']){
     }
 }
 
+if ($_GET['action'] == 'disconnect'){
+    disconnect();
+}
+
 
 Timber::render('assets/templates/config-page.html.twig', array(
     'connected' => $result['connected'],

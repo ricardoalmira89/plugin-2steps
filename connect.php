@@ -23,3 +23,8 @@ function connect(){
 
     return $result;
 }
+
+function  disconnect(){
+    $client = new Client();
+    $client->authManager->logout();
+}

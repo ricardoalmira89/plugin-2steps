@@ -14,6 +14,7 @@ use Alm\AlmValidator;
 use TwoStepReviews\Resource\Company;
 use TwoStepReviews\Resource\DashBoard;
 use TwoStepReviews\Resource\Review;
+use TwoStepReviews\Resource\User;
 
 class Client
 {
@@ -28,6 +29,7 @@ class Client
             'review' => new Review($this->authManager),
             'company' => new Company($this->authManager),
             'dashboard' => new DashBoard($this->authManager),
+            'user' => new User($this->authManager),
         );
     }
 

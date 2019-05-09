@@ -26,6 +26,7 @@
 
                 {% if (connected) %}
                     <button type="button" class="btn btn-success">Connected</button>
+                    <a href="{{ url ~ '&action=disconnect' }}" class="btn btn-danger">Logout</a>
                 {% else %}
                     <button type="button" class="btn btn-danger">Disconnected</button>
                 {% endif %}

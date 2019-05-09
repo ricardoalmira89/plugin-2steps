@@ -13,8 +13,10 @@ class DashBoard extends BaseResource
     }
 
     public function getDashBoard($options = []){
+        $endpoint = sprintf("%s?%s", $this->endpoint."/dashboard", http_build_query($options));
         $this->authorizeRequest($options);
-        $res = $this->client->get($this->endpoint."/dashboard", $options);
+
+        $res = $this->client->get($endpoint, $options);
         return json_decode($res->getBody()->getContents());
     }
 
